@@ -23,6 +23,7 @@ body {
 
 .main {
   min-height: calc(100vh - 90px - 80px);
+  padding-bottom: 2rem;
 }
 
 .label-field {
