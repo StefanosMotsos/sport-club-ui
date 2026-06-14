@@ -3,10 +3,10 @@ import {HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
-  intercept(req: HttpRequest<any>, next: HttpHandler){
+  intercept(req: HttpRequest<any>, next: HttpHandler) {
     const authToken = localStorage.getItem('access_token');
 
-    if (!authToken) {
+    if (!authToken || req.url.includes('/api/v1/auth/authenticate')) {
       return next.handle(req);
     }
 

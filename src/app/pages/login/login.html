@@ -1,15 +1,35 @@
-<main class="main d-flex align-items-center justify-content-center">
-  <form class="form-card py-4 w-100 d-flex flex-column">
+<main class="main d-flex flex-column align-items-center justify-content-center">
+  @if (errorMessage) {
+    <div class="alert alert-danger py-2">{{ errorMessage }}</div>
+  }
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="form-card py-4 w-100 d-flex flex-column">
     <h1 class="fs-4 fw-bold text-purple mb-3">Login</h1>
     <div class="d-flex flex-column g-2 mb-3">
       <label class="label-field text-muted">USERNAME</label>
-      <input type="text" class="text-secondary p-1">
+      <input type="text" class="text-secondary p-1" formControlName="username">
+      @if (form.get('username')?.touched) {
+        @if (form.get('username')?.hasError('required')) {
+          <div class="text-danger small">Username is required</div>
+        }
+      }
     </div>
     <div class="d-flex flex-column g-1 mb-4">
       <label class="label-field text-muted">PASSWORD</label>
-      <input type="text" class="text-secondary p-1">
+      <input type="password" class="text-secondary p-1" formControlName="password">
+      @if (form.get('password')?.touched) {
+        @if (form.get('password')?.hasError('required')) {
+          <div class="text-danger small">Password is required</div>
+        } @else if (form.get('password')?.hasError('pattern')) {
+          <div class="text-danger small">
+            Password must be at least 8 characters and include uppercase, lowercase, a number, and a special character
+          </div>
+        }
+      }
     </div>
     <mat-divider/>
-    <button matButton="filled" class="mt-4">Submit</button>
+    <button matButton="filled" class="mt-4" type="submit" [disabled]='form.invalid'>Submit</button>
   </form>
 </main>

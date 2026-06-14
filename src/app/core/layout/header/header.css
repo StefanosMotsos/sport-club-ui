@@ -33,3 +33,7 @@ mat-icon {
 .dropdown-btn:hover {
   background-color: var(--blue) !important;
 }
+
+.menu-margin {
+  margin-top: 6.5rem;
+}

@@ -1,20 +1,53 @@
 <header class="header fixed-top">
   <span routerLink="/" class="fs-4 fw-bold text-white" role="button">Athens Sport Club</span>
   <div class="d-flex align-items-center justify-content-center gap-1">
-    <button matButton class="dropdown-btn btn bg-transparent border-0 text-white px-4 py-2 fw-semibold fs-5">
-      <span>Members</span>
-      <mat-icon>expand_more</mat-icon>
-    </button>
-    <button matButton class="dropdown-btn btn bg-transparent border-0 text-white px-4 py-2 fw-semibold fs-5">
-      <span>Users</span>
-      <mat-icon>expand_more</mat-icon>
-    </button>
+    @if (isAdmin() || isEmployee()) {
+      <div class="position-relative">
+        <button matButton
+                (click)="onMembersClick()"
+                class="dropdown-btn btn bg-transparent border-0 text-white px-4 py-2 fw-semibold fs-5">
+          <span>Members</span>
+          <mat-icon>expand_more</mat-icon>
+        </button>
+        @if (isMembersOpen) {
+          <ul class="dropdown-menu dropdown-menu-end show position-absolute mt-2 cursor">
+            <li><a class="dropdown-item" (click)="navigateTo('/members')">Member List</a></li>
+            @if (isAdmin()) {
+              <li><a class="dropdown-item" (click)="navigateTo('/register/member')">Register Member</a></li>
+            }
+          </ul>
+        }
+      </div>
+    }
+    @if (isMember()) {
+      <button matButton
+              (click)="navigateTo('/member-details')"
+              class="dropdown-btn btn bg-transparent border-0 text-white px-4 py-2 fw-semibold fs-5">
+        <span>My Profile</span>
+      </button>
+    }
   </div>
-  <div class="d-flex justify-content-end">
-    <a
+  @if (!user()) {
+    <div class="d-flex justify-content-end">
+      <a
       routerLink="/login"
       class="login-btn btn bg-transparent border border-white border-2 text-white rounded-pill px-3 py-1 fw-semibold fs-5">
       Login
-    </a>
-  </div>
+      </a>
+    </div>
+  } @else {
+    <div
+      (click)="onLogoutClick()"
+      class="position-relative d-flex justify-content-end">
+      <button matButton class="dropdown-btn btn bg-transparent border-0 text-white px-4 py-2 fw-semibold fs-5">
+        <span>Welcome, {{user()?.sub}}</span>
+        <mat-icon>expand_more</mat-icon>
+      </button>
+      @if (isLogoutOpen) {
+        <ul class="dropdown-menu dropdown-menu-end show position-absolute mt-5 cursor">
+          <li><a class="dropdown-item" (click)="userService.logout()">Logout</a></li>
+        </ul>
+      }
+    </div>
+  }
 </header>
