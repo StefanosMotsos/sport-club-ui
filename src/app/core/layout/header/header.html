@@ -14,6 +14,7 @@
             <li><a class="dropdown-item" (click)="navigateTo('/members')">Member List</a></li>
             @if (isAdmin()) {
               <li><a class="dropdown-item" (click)="navigateTo('/register/member')">Register Member</a></li>
+              <li><a class="dropdown-item" (click)="navigateTo('/register/user')">Register User</a></li>
             }
           </ul>
         }
