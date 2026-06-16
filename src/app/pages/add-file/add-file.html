@@ -1,0 +1,29 @@
+<main class="main d-flex align-items-center justify-content-center">
+  @if (errorMessage) {
+    <div class="alert alert-danger py-2 px-3">{{ errorMessage }}</div>
+  }
+  <div class="upload-card pt-5 pb-4 w-100 d-flex flex-column">
+    <h1 class="fs-2 fw-bold text-purple mb-3">Add Membership File</h1>
+    <input type="file" #fileInput class="d-none" (change)="onFileSelected($event)">
+    @if (!file()) {
+      <div class="d-flex flex-column align-items-center justify-content-center px-3 pt-5 pb-4 mt-2 border-dashed"
+           (dragover)="$event.preventDefault()"
+           (drop)="onDrop($event)"
+           (click)="fileInput.click()">
+        <div class="d-flex flex-column align-items-center justify-content-center gap-2">
+          <mat-icon class="upload-icon">upload_file</mat-icon>
+          <p class="text-purple fs-4 mb-0">click or drag file here</p>
+        </div>
+      </div>
+    } @else {
+      <div class="d-flex align-items-center justify-content-between px-3 pt-3 pb-2 mt-2 border rounded gap-1">
+        <div class="d-flex align-items-center justify-content-center gap-1">
+          <mat-icon class="text-success">check_circle</mat-icon>
+          <span class="fs-5 text-purple">{{ file()!.name }}</span>
+        </div>
+        <mat-icon class="text-danger cursor" (click)="file.set(null)">close</mat-icon>
+      </div>
+    }
+    <button matButton="filled" class="mt-4" [disabled]="!file()" (click)="onSubmit()">Submit</button>
+  </div>
+</main>

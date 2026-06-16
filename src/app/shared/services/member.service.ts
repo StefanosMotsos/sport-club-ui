@@ -14,4 +14,10 @@ export class MemberService {
   registerMember(member: MemberInsertDTO) {
     return this.http.post<MemberReadOnlyDTO>(`${API_URL}`, member);
   }
+
+  addFile(uuid: string, file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<void>(`${API_URL}/${uuid}/membership-file`, formData);
+  }
 }

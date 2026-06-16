@@ -6,6 +6,7 @@ import {RegisterUser} from './pages/register-user/register-user';
 import {RegisterMember} from './pages/register-member/register-member';
 import {authGuard} from './shared/guards/auth-guard';
 import {adminGuard} from './shared/guards/admin-guard';
+import {AddFile} from './pages/add-file/add-file';
 
 export const routes: Routes = [
   {
@@ -16,6 +17,7 @@ export const routes: Routes = [
       { path: 'login', component: Login },
       { path: 'register/user', component: RegisterUser, canActivate: [authGuard, adminGuard] },
       { path: 'register/member', component: RegisterMember, canActivate: [authGuard, adminGuard] },
+      { path: 'register/add-file', component: AddFile},
     ]
   }
 ];
