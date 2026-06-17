@@ -9,6 +9,7 @@ import {adminGuard} from './shared/guards/admin-guard';
 import {AddFile} from './pages/add-file/add-file';
 import {MemberList} from './pages/member-list/member-list';
 import {staffGuard} from './shared/guards/staff-guard';
+import {MemberEdit} from './pages/member-edit/member-edit';
 
 export const routes: Routes = [
   {
@@ -21,6 +22,7 @@ export const routes: Routes = [
       { path: 'register/member', component: RegisterMember, canActivate: [authGuard, adminGuard] },
       { path: 'register/:uuid/add-file', component: AddFile, canActivate: [authGuard, adminGuard]},
       { path: 'members', component: MemberList, canActivate: [authGuard, staffGuard] },
+      { path: 'members/:uuid/edit', component: MemberEdit, canActivate: [authGuard, adminGuard] },
     ]
   }
 ];

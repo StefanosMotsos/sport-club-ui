@@ -1,0 +1,147 @@
+<main class="main d-flex align-items-center justify-content-center">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="form-card-wide py-4 w-100 d-flex flex-column">
+    <h1 class="fs-1 fw-bold text-purple mb-5 text-decoration-underline">Update Member</h1>
+    @if (errorMessage) {
+      <div class="alert alert-danger py-2">{{ errorMessage }}</div>
+    }
+    <div class="container mb-5">
+      <h2 class="fs-5 text-purple">Member Info</h2>
+      <div class="row g-3">
+        <div class="col-md-4 d-flex flex-column gap-1">
+          <label class="label-field text-muted">FIRST NAME</label>
+          <input type="text" class="text-secondary p-1 w-75" formControlName="firstname">
+          @if (form.get('firstname')?.touched) {
+            @if (form.get('firstname')?.hasError('required')) {
+              <div class="text-danger small">First name is required</div>
+            } @else if (form.get('firstname')?.hasError('minlength')) {
+              <div class="text-danger small">First name must be at least 2 characters</div>
+            }
+          }
+        </div>
+        <div class="col-md-4 d-flex flex-column gap-1">
+          <label class="label-field text-muted">LAST NAME</label>
+          <input type="text" class="text-secondary p-1 w-75" formControlName="lastname">
+          @if (form.get('lastname')?.touched) {
+            @if (form.get('lastname')?.hasError('required')) {
+              <div class="text-danger small">Last name is required</div>
+            } @else if (form.get('lastname')?.hasError('minlength')) {
+              <div class="text-danger small">Last name must be at least 2 characters</div>
+            }
+          }
+        </div>
+        <div class="col-md-4 d-flex flex-column gap-1">
+          <label class="label-field text-muted">VAT</label>
+          <input type="text" class="text-secondary p-1 w-75" formControlName="vat">
+          @if (form.get('vat')?.touched) {
+            @if (form.get('vat')?.hasError('pattern')) {
+              <div class="text-danger small">VAT must be at least 9 digits</div>
+            }
+          }
+        </div>
+        <div class="col-md-4 d-flex flex-column gap-1">
+          <label class="label-field text-muted">SPORT</label>
+          <select class="p-1 w-75" formControlName="sportId">
+            <option value="" disabled selected>Select Sport:</option>
+            @for (sport of sports; track sport.id) {
+              <option [value]="sport.id">{{ sport.name }}</option>
+            }
+          </select>
+          @if (form.get('sportId')?.touched) {
+            @if (form.get('sportId')?.hasError('required')) {
+              <div class="text-danger small">Sport is required</div>
+            }
+          }
+        </div>
+        <div class="col-md-4 d-flex flex-column gap-1">
+          <label class="label-field text-muted">MEMBERSHIP TYPE:</label>
+          <select class="p-1 w-75" formControlName="membershipTypeId">
+            <option value="" disabled selected>Select Membership:</option>
+            @for (type of membershipTypes; track type.id) {
+              <option [value]="type.id">{{ type.name }}</option>
+            }
+          </select>
+          @if (form.get('membershipTypeId')?.touched) {
+            @if (form.get('membershipTypeId')?.hasError('required')) {
+              <div class="text-danger small">Membership type is required</div>
+            }
+          }
+        </div>
+      </div>
+
+      <h2 class="fs-5 text-purple mt-5">Personal Info</h2>
+      <div class="row g-3" formGroupName="personalInfoUpdateDTO">
+        <div class="col-md-4 d-flex flex-column gap-1">
+          <label class="label-field text-muted">MEMBERSHIP ID</label>
+          <input type="text" class="text-secondary p-1 w-75" formControlName="membershipId">
+          @if (form.get('personalInfoUpdateDTO.membershipId')?.touched) {
+            @if (form.get('personalInfoUpdateDTO.membershipId')?.hasError('required')) {
+              <div class="text-danger small">Membership ID is required</div>
+            } @else if (form.get('personalInfoUpdateDTO.membershipId')?.hasError('pattern')) {
+              <div class="text-danger small">Membership ID must be exactly 11 digits</div>
+            }
+          }
+        </div>
+        <div class="col-md-4 d-flex flex-column gap-1">
+          <label class="label-field text-muted">IDENTITY NUMBER</label>
+          <input type="text" class="text-secondary p-1 w-75" formControlName="identityNumber">
+          @if (form.get('personalInfoUpdateDTO.identityNumber')?.touched) {
+            @if (form.get('personalInfoUpdateDTO.identityNumber')?.hasError('required')) {
+              <div class="text-danger small">Identity number is required</div>
+            }
+          }
+        </div>
+        <div class="col-md-4 d-flex flex-column gap-1">
+          <label class="label-field text-muted">PLACE OF BIRTH</label>
+          <input type="text" class="text-secondary p-1 w-75" formControlName="placeOfBirth">
+          @if (form.get('personalInfoUpdateDTO.placeOfBirth')?.touched) {
+            @if (form.get('personalInfoUpdateDTO.placeOfBirth')?.hasError('required')) {
+              <div class="text-danger small">Place of birth is required</div>
+            }
+          }
+        </div>
+        <div class="col-md-4 d-flex flex-column gap-1">
+          <label class="label-field text-muted">BRANCH OF REGISTRATION</label>
+          <input type="text" class="text-secondary p-1 w-75" formControlName="branchOfRegistration">
+          @if (form.get('personalInfoUpdateDTO.branchOfRegistration')?.touched) {
+            @if (form.get('personalInfoUpdateDTO.branchOfRegistration')?.hasError('required')) {
+              <div class="text-danger small">Branch of registration is required</div>
+            }
+          }
+        </div>
+      </div>
+
+      <h2 class="fs-5 text-purple mt-5">Account Credentials</h2>
+      <div class="row g-3" formGroupName="userUpdateDTO">
+        <div class="col-md-6 d-flex flex-column gap-1">
+          <label class="label-field text-muted">USERNAME</label>
+          <input type="text" class="text-secondary p-1 w-75" formControlName="username">
+          @if (form.get('userUpdateDTO.username')?.touched) {
+            @if (form.get('userUpdateDTO.username')?.hasError('required')) {
+              <div class="text-danger small">Username is required</div>
+            }
+          }
+        </div>
+        <div class="col-md-6 d-flex flex-column gap-1">
+          <label class="label-field text-muted">PASSWORD</label>
+          <input type="password" class="text-secondary p-1 w-75" formControlName="password">
+          @if (form.get('userUpdateDTO.password')?.touched) {
+            @if (form.get('userUpdateDTO.password')?.hasError('required')) {
+              <div class="text-danger small">Password is required</div>
+            } @else if (form.get('userUpdateDTO.password')?.hasError('pattern')) {
+              <div class="text-danger small">
+                Password must be at least 8 characters and include uppercase, lowercase, a number, and a special character
+              </div>
+            }
+          }
+        </div>
+      </div>
+    </div>
+    <mat-divider/>
+    <div class="d-flex justify-content-center mt-4 px-5">
+      <button matButton="filled" class="px-5 w-25" type="submit" [disabled]="form.invalid">Submit</button>
+    </div>
+  </form>
+</main>

@@ -46,3 +46,14 @@ export interface Page<MemberReadOnlyDTO> {
   number: number;
   size: number;
 }
+
+export interface MemberUpdateDTO {
+  uuid: string;
+  firstname: string;
+  lastname: string;
+  vat?: string;
+  sportId: number;
+  membershipTypeId: number;
+  userUpdateDTO: UserFields;
+  personalInfoUpdateDTO: PersonalInfoInsertDTO;
+}
