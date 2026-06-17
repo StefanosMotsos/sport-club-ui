@@ -6,7 +6,7 @@ export const staffGuard: CanActivateFn = (route, state) => {
   const userService = inject(UserService);
   const router = inject(Router);
 
-  if (userService.user()?.role === 'ADMIN' && userService.user()?.role === 'EMPLOYEE') {
+  if (userService.user()?.role === 'ADMIN' || userService.user()?.role === 'EMPLOYEE') {
     return true;
   }
 

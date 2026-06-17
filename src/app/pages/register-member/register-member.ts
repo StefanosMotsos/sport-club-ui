@@ -86,7 +86,7 @@ export class RegisterMember {
 
     this.memberService.registerMember(newMember).subscribe({
       next: (response) => {
-        this.router.navigate(['/members', response.uuid, 'add-file']);
+        this.router.navigate(['/register', response.uuid, 'add-file']);
       },
       error: (error) => {
         this.errorMessage = error.error?.description ?? 'Registration failed. Please try again later';

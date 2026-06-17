@@ -7,6 +7,8 @@ import {RegisterMember} from './pages/register-member/register-member';
 import {authGuard} from './shared/guards/auth-guard';
 import {adminGuard} from './shared/guards/admin-guard';
 import {AddFile} from './pages/add-file/add-file';
+import {MemberList} from './pages/member-list/member-list';
+import {staffGuard} from './shared/guards/staff-guard';
 
 export const routes: Routes = [
   {
@@ -17,7 +19,8 @@ export const routes: Routes = [
       { path: 'login', component: Login },
       { path: 'register/user', component: RegisterUser, canActivate: [authGuard, adminGuard] },
       { path: 'register/member', component: RegisterMember, canActivate: [authGuard, adminGuard] },
-      { path: 'register/add-file', component: AddFile},
+      { path: 'register/:uuid/add-file', component: AddFile, canActivate: [authGuard, adminGuard]},
+      { path: 'members', component: MemberList, canActivate: [authGuard, staffGuard] },
     ]
   }
 ];

@@ -1,0 +1,17 @@
+.filter-border {
+  border: 3px solid var(--purple);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 24rem;
+}
+
+input, select {
+  border: 2px solid var(--purple);
+  border-radius: 12px;
+  padding-left: 10px;
+}
+
+input:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(120, 81, 169, 0.2);
+}

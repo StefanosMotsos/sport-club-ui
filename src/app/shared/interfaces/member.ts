@@ -1,7 +1,7 @@
 import {UserFields} from './user-login';
 
 export interface PersonalInfoInsertDTO {
-  membershipId: string;       // 11-digit string, e.g. "12345678901"
+  membershipId: string;
   identityNumber: string;
   placeOfBirth: string;
   branchOfRegistration: string;
@@ -10,10 +10,10 @@ export interface PersonalInfoInsertDTO {
 export interface MemberInsertDTO {
   firstname: string;
   lastname: string;
-  vat?: string;                // optional, 9+ digit string if present
+  vat?: string;
   sportId: number;
   membershipTypeId: number;
-  userInsertDTO: UserFields;   // { username, password, roleId } - your existing UserInsertDTO shape
+  userInsertDTO: UserFields;
   personalInfoInsertDTO: PersonalInfoInsertDTO;
 }
 
@@ -22,10 +22,27 @@ export interface MemberReadOnlyDTO {
   firstname: string;
   lastname: string;
   vat: string;
-  sport: string;            // sport NAME (string), not sportId
-  membershipType: string;   // membership type NAME (string), not membershipTypeId
-  activity: string;         // likely "ACTIVE" | "INACTIVE" or similar enum-as-string
+  sport: string;
+  membershipType: string;
+  activity: string;
   identityNumber: string;
   membershipId: string;
   username: string;
+}
+
+export interface MemberFilters {
+  vat?: string;
+  membershipId?: string;
+  lastname?: string;
+  deleted?: boolean;
+  sport?: string;
+  activity?: string;
+}
+
+export interface Page<MemberReadOnlyDTO> {
+  content: MemberReadOnlyDTO[];
+  totalElements: number;
+  totalPages: number;
+  number: number;
+  size: number;
 }
