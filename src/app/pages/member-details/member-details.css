@@ -1,0 +1,6 @@
+.details-card {
+  border: 3px solid var(--purple);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 48rem;
+}

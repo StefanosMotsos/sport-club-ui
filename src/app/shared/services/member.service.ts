@@ -46,6 +46,10 @@ export class MemberService {
     return this.http.get<MemberReadOnlyDTO>(`${API_URL}/${uuid}`);
   }
 
+  getMyProfile() {
+    return this.http.get<MemberReadOnlyDTO>(`${API_URL}/me`);
+  }
+
   editMember(member: MemberUpdateDTO) {
     return this.http.put<MemberReadOnlyDTO>(`${API_URL}/${member.uuid}`, member);
   }

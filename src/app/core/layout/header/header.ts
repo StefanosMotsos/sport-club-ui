@@ -3,6 +3,7 @@ import {MatButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import {Router, RouterLink} from '@angular/router';
 import {UserService} from '../../../shared/services/user.service';
+import {MemberService} from '../../../shared/services/member.service';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,7 @@ import {UserService} from '../../../shared/services/user.service';
 })
 export class Header {
   userService = inject(UserService);
+  memberService = inject(MemberService);
   user = this.userService.user;
   router = inject(Router);
 
@@ -36,6 +38,12 @@ export class Header {
     this.isLogoutOpen = false;
     this.isMembersOpen = false;
     this.router.navigate([path]);
+  }
+
+  onMyProfile() {
+    this.memberService.getMyProfile().subscribe(member => {
+      this.router.navigate(['/members', member.uuid, 'details']);
+    });
   }
 
   isAdmin(): boolean {
